@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.EntityFrameworkCore;
 using CMPG323_35396539_Project_2.Models;
+using System.Linq.Expressions;
 
 namespace CMPG323_35396539_Project_2.Controllers
 {
@@ -42,6 +43,32 @@ namespace CMPG323_35396539_Project_2.Controllers
             return category;
         }
 
+        //GET: api/Categories/devices/7
+
+        [HttpGet("devices/{id}")]
+        public async Task<ActionResult<IEnumerable<Device>>> GetDevicesInCategory(Guid id)
+        {
+            var devices = await _context.Device.Where(cat => cat.CategoryId == id).ToListAsync();
+            if (devices == null)
+            {
+                return NotFound();
+            }
+            return Ok(devices);
+        }
+
+        //GET: api/Categories/zones/7
+        //Returns the number of zones in each cat
+
+        //[HttpGet("zones/{id}")]
+        //public async Task<ActionResult<IEnumerable<Zone>>> GetZonesInCategory(Guid id)
+        //{
+        //    var zones = await _context.Zone.Join(_context.Device, _context.Zone.CategoryId) .ToListAsync();
+        //    if (zones == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return Ok(zones);
+        //}
 
         // PUT: api/Categories/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
