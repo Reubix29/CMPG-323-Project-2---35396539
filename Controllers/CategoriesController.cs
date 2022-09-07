@@ -57,18 +57,27 @@ namespace CMPG323_35396539_Project_2.Controllers
         }
 
         //GET: api/Categories/zones/7
-        //Returns the number of zones in each cat
+        //Returns the number of zones in each category
 
-        //[HttpGet("zones/{id}")]
-        //public async Task<ActionResult<IEnumerable<Zone>>> GetZonesInCategory(Guid id)
-        //{
-        //    var zones = await _context.Zone.Join(_context.Device, _context.Zone.CategoryId) .ToListAsync();
-        //    if (zones == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return Ok(zones);
-        //}
+        [HttpGet("zones/{id}")]
+        public async Task<ActionResult<IEnumerable<Zone>>> GetZonesInCategory(Guid id)
+        {
+            var zones = await _context.Zone.Join(_context.Device,
+                zone => zone.ZoneId, 
+                device => device.DeviceId, 
+                (zone, device) => new
+                {
+                    Zone = zone,
+                    Device = device
+                })
+                .Where(entity => entity.Device.CategoryId == id)
+                .ToListAsync();
+            if (zones == null)
+            {
+                return NotFound();
+            }
+            return Ok("Number of zones in category {id}: " + zones.Count.ToString());
+        }
 
         // PUT: api/Categories/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
