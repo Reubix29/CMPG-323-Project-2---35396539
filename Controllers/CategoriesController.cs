@@ -42,6 +42,7 @@ namespace CMPG323_35396539_Project_2.Controllers
             return category;
         }
 
+
         // PUT: api/Categories/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
@@ -102,7 +103,7 @@ namespace CMPG323_35396539_Project_2.Controllers
 
         //PATCH: api/Categories/5
         [HttpPatch("{id}")]
-        public async Task<IActionResult> PatchCategory(Guid id, JsonPatchDocument<Category> patchCategory)
+        public async Task<IActionResult> PatchCategory(Guid id, [FromBody] JsonPatchDocument<Category> patchCategory)
         {
             var category = await _context.Category.FindAsync(id);
             if (category == null)

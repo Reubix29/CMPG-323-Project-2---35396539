@@ -76,7 +76,7 @@ namespace CMPG323_35396539_Project_2.Controllers
 
         //PATCH: api/Devices/5
         [HttpPatch("{id}")]
-        public async Task<IActionResult> PatchDevice(Guid id, JsonPatchDocument<Device> patchDevice)
+        public async Task<IActionResult> PatchDevice(Guid id, [FromBody] JsonPatchDocument<Device> patchDevice)
         {
             var device = await _context.Device.FindAsync(id);
             if (device == null)

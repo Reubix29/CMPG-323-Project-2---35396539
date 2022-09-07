@@ -76,7 +76,7 @@ namespace CMPG323_35396539_Project_2.Controllers
 
         //PATCH: api/Zones/5
         [HttpPatch("{id}")]
-        public async Task<IActionResult> PatchDevice(Guid id, JsonPatchDocument<Zone> patchZone)
+        public async Task<IActionResult> PatchDevice(Guid id, [FromBody] JsonPatchDocument<Zone> patchZone)
         {
             var zone = await _context.Zone.FindAsync(id);
             if (zone == null)
@@ -86,7 +86,7 @@ namespace CMPG323_35396539_Project_2.Controllers
 
             patchZone.ApplyTo(zone, ModelState);
 
-            return Ok(device);
+            return Ok(zone);
         }
 
         // POST: api/Zones
