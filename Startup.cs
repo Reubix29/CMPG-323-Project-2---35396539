@@ -30,7 +30,7 @@ namespace CMPG323_35396539_Project_2
         {
             services.AddControllers().AddNewtonsoftJson();
             services.AddDbContext<ConnectedOfficeContext>(options => options.UseSqlServer("name=ConnectionStrings:DefaultConnection"));
-            services.AddSwaggerGen(options => { options.SwaggerDoc("v2", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "My Test Demo API", Version = "v2", Description = "Test Demo Walkthrough", }); });
+            services.AddSwaggerGen(options => { options.SwaggerDoc("v2", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Reuben Smit's API", Version = "v2", Description = "An API test environment for the CMPG323 module.", }); });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,7 +52,7 @@ namespace CMPG323_35396539_Project_2
                 endpoints.MapControllers();
             });
             app.UseSwagger();
-            app.UseSwaggerUI(options => options.SwaggerEndpoint("/swagger/v2/swagger.json", "My Test Demo"));
+            app.UseSwaggerUI(options => options.SwaggerEndpoint("/swagger/v2/swagger.json", "Reuben Smit's API"));
         }
     }
 }
